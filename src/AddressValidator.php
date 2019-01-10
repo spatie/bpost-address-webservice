@@ -2,12 +2,10 @@
 
 namespace Spatie\BpostAddressWebservice;
 
-use GuzzleHttp\Client;
+use Spatie\BpostAddressWebservice\Gateways\BpostGateway;
 
 class AddressValidator
 {
-    const BASE_URI = 'https://webservices-pub.bpost.be/ws/ExternalMailingAddressProofingCSREST_v1/';
-
     const OPTION_INCLUDE_FORMATTING = 'IncludeFormatting';
     const OPTION_INCLUDE_SUGGESTIONS = 'IncludeSuggestions';
     const OPTION_INCLUDE_SUBMITTED_ADDRESS = 'IncludeSubmittedAddress';
@@ -17,67 +15,35 @@ class AddressValidator
     const OPTION_INCLUDE_LIST_OF_BOXES = 'IncludeListOfBoxes';
     const OPTION_INCLUDE_NUMBER_OF_BOXES = 'IncludeNumberOfBoxes';
 
-    /** @var \GuzzleHttp\Client */
-    protected $client;
+    /** @var \Spatie\BpostAddressWebservice\Gateway */
+    protected $gateway;
 
     /** @var array */
     protected $options = [];
 
-    public function __construct(Client $client)
+    public function __construct(Gateway $gateway)
     {
-        $this->client = $client;
+        $this->gateway = $gateway;
     }
 
-    public static function create(): AddressValidator
+    public function create(): AddressValidator
     {
-        return new static(new Client([
-            'base_uri' => static::BASE_URI,
-        ]));
+        return new static(new BpostGateway());
     }
 
-    public function withoptions(array $options): AddressValidator
+    public function withOptions(array $options): AddressValidator
     {
         $this->options = $options;
 
         return $this;
     }
 
-    public function validate(array $addresses)
+    public function validate(array $addresses): array
     {
         if (count($addresses) > 100) {
             throw new TooManyAddresses();
         }
 
-        $addressesToValidate = array_map(function (Address $address, int $i) {
-            return array_merge(
-                ['@id' => $i],
-                $address->ToBpostArray()
-            );
-        }, $addresses, array_keys($addresses));
-
-        $requestBody = [
-            'ValidateAddressesRequest' => [
-                'AddressToValidateList' => [
-                    'AddressToValidate' => $addressesToValidate,
-                ],
-                'ValidateAddressOptions' => $this->options,
-            ],
-        ];
-
-        $response = $this->client
-            ->request('POST', 'address/validateAddresses', [
-                'json' => $requestBody,
-            ]);
-
-        $responseBody = json_decode((string) $response->getBody(), true);
-
-        $validationResults = $responseBody['ValidateAddressesResponse']['ValidatedAddressResultList']['ValidatedAddressResult'] ?? [];
-
-        return array_map(function (array $validationResult) use ($addresses) {
-            return new AddressValidationResult(
-                $validationResult,
-                $addresses[$validationResult['@id']]
-            );
-        }, $validationResults);
+        return $this->gateway->postValidateAddress($addressesToValidate, $options);
     }
 }
