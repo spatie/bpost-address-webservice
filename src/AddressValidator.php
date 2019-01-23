@@ -3,6 +3,7 @@
 namespace Spatie\BpostAddressWebservice;
 
 use Spatie\BpostAddressWebservice\Gateways\BpostGateway;
+use Spatie\BpostAddressWebservice\Requests\ValidateAddressesRequest;
 
 class AddressValidator
 {
@@ -16,17 +17,17 @@ class AddressValidator
     const OPTION_INCLUDE_NUMBER_OF_BOXES = 'IncludeNumberOfBoxes';
 
     /** @var \Spatie\BpostAddressWebservice\Gateway */
-    protected $gateway;
+    private $gateway;
 
     /** @var array */
-    protected $options = [];
+    private $options = [];
 
     public function __construct(Gateway $gateway)
     {
         $this->gateway = $gateway;
     }
 
-    public function create(): AddressValidator
+    public static function create(): AddressValidator
     {
         return new static(new BpostGateway());
     }
@@ -44,6 +45,10 @@ class AddressValidator
             throw new TooManyAddresses();
         }
 
-        return $this->gateway->postValidateAddress($addressesToValidate, $options);
+        $validateAddressesResponse = $this->gateway->validateAddresses(
+            new ValidateAddressesRequest($addresses, $this->options)
+        );
+
+        return $validateAddressesResponse->validatedAddresses();
     }
 }

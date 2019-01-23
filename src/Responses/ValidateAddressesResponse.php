@@ -1,97 +1,59 @@
 <?php
 
-namespace Spatie\BpostAddressWebservice;
+namespace Spatie\BpostAddressWebservice\Responses;
 
 use GuzzleHttp\Psr7\Response;
+use Spatie\BpostAddressWebservice\Address;
+use Spatie\BpostAddressWebservice\Error;
 use Spatie\BpostAddressWebservice\Requests\ValidateAddressesRequest;
+use Spatie\BpostAddressWebservice\ValidatedAddress;
+use Spatie\BpostAddressWebservice\Warning;
 
 class ValidateAddressesResponse
 {
-    /** @var \Spatie\BpostAddressWebservice\Address */
-    protected $validatedAddress;
+    /** @var string */
+    private $error;
 
-    /** @var \Spatie\BpostAddressWebservice\Address */
-    protected $originalAddress;
+    /** @var string */
+    private $validatedAddresses = [];
 
-    /** @var \Spatie\BpostAddressWebservice\Warning[] */
-    protected $warnings;
-
-    /** @var \Spatie\BpostAddressWebservice\Error[] */
-    protected $errors;
-
-    public function __construct(
-        Address $validatedAddress,
-        Address $originalAddress,
-        array $warnings,
-        array $errors
-    ) {
-        $this->validatedAddress = $validatedAddress;
-        $this->originalAddress = $originalAddress;
-        $this->warnings = $warnings;
-        $this->errors = $errors;
+    private function __construct()
+    {
     }
 
-    public static function fromResponse(array $response, ValidateAddressesRequest $validateAddressesRequest): array
+    public function validatedAddresses(): array
     {
-        $this->validatedAddress = Address::fromResponse(
-            $validationResult['ValidatedAddressList']['ValidatedAddress'][0]
-        );
+        return $this->validatedAddresses;
+    }
 
-        $this->originalAddress = $originalAddress;
+    public static function fromResponseBody(array $responseBody, array $originalAddresses): ValidateAddressesResponse
+    {
+        $validationResults = $responseBody['ValidateAddressesResponse']['ValidatedAddressResultList']['ValidatedAddressResult'] ?? [];
 
-        $errors = [];
-        $warnings = [];
+        $validateAddressResponse = new self();
 
-        foreach ($validationResult['Error'] ?? [] as $error) {
-            if ($error['ErrorSeverity'] === 'warning') {
-                $warnings[] = new Warning($error['ErrorCode'], $error['ComponentRef']);
+        $validateAddressResponse->validatedAddresses = array_map(function (array $validationResult) use ($originalAddresses) {
+            $errors = [];
+            $warnings = [];
+
+            foreach ($validationResult['Error'] ?? [] as $error) {
+                if ($error['ErrorSeverity'] === 'warning') {
+                    $warnings[] = new Warning($error['ErrorCode'], $error['ComponentRef']);
+                }
+
+                if ($error['ErrorSeverity'] === 'error') {
+                    $errors[] = new Error($error['ErrorCode'], $error['ComponentRef']);
+                }
             }
 
-            if ($error['ErrorSeverity'] === 'error') {
-                $errors[] = new Error($error['ErrorCode'], $error['ComponentRef']);
-            }
-        }
+            return new ValidatedAddress(
+                Address::fromResponse($validationResult['ValidatedAddressList']['ValidatedAddress'][0] ?? []),
+                $originalAddresses[$validationResult['@id']],
+                $errors,
+                $warnings
+            );
+        }, $validationResults);
 
-        return new static($validatedAddress, $originalAddress, $warnings, $errors);
-    }
-
-    public function originalAddress(): Address
-    {
-        return $this->originalAddress;
-    }
-
-    public function validatedAddress(): Address
-    {
-        return $this->validatedAddress;
-    }
-
-    public function issues(): array
-    {
-        return array_merge($warnings, $errors);
-    }
-
-    public function hasIssues(): bool
-    {
-        return ! (empty($this->warnings) && empty($this->errors));
-    }
-
-    public function warnings(): array
-    {
-        return $this->warnings;
-    }
-
-    public function hasWarnings(): bool
-    {
-        return ! empty($this->warnings);
-    }
-
-    public function errors(): array
-    {
-        return $this->errors;
-    }
-
-    public function hasErrors(): bool
-    {
-        return ! empty($this->errors);
+        return $validateAddressResponse;
     }
 }

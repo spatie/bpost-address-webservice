@@ -3,14 +3,16 @@
 namespace Spatie\BpostAddressWebservice\Requests;
 
 use Spatie\BpostAddressWebservice\Address;
+use Spatie\BpostAddressWebservice\ValidateAddressesResponse;
+use Spatie\BpostAddressWebservice\AddressValidator;
 
 class ValidateAddressesRequest
 {
     /** @var array */
-    protected $addresses;
+    private $addresses;
 
     /** @var array */
-    protected $options;
+    private $options;
 
     public function __construct(array $addresses, array $options)
     {
@@ -19,7 +21,7 @@ class ValidateAddressesRequest
         $this->options = $options;
     }
 
-    public function getAddresses(): array
+    public function addresses(): array
     {
         return $this->addresses;
     }
@@ -32,21 +34,21 @@ class ValidateAddressesRequest
                 'PostalAddress' => [
                     'DeliveryPointLocation' => [
                         'StructuredDeliveryPointLocation' => [
-                            'StreetName' => $address->street_name,
-                            'StreetNumber' => $address->street_number,
-                            'BoxNumber' => $address->box_number,
+                            'StreetName' => $address->streetName,
+                            'StreetNumber' => $address->streetNumber,
+                            'BoxNumber' => $address->boxNumber,
                         ],
                     ],
                     'PostalCodeMunicipality' => [
                         'StructuredPostalCodeMunicipality' => [
-                            'PostalCode' => $address->postal_code,
-                            'MunicipalityName' => $address->municipality_name,
+                            'PostalCode' => $address->postalCode,
+                            'MunicipalityName' => $address->municipalityName,
                         ],
                     ],
                 ],
                 'DeliveringCountryISOCode' => $address->country,
             ];
-        }, $addresses, array_keys($addresses));
+        }, $this->addresses, array_keys(array_values($this->addresses)));
 
         return [
             'ValidateAddressesRequest' => [

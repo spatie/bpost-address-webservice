@@ -4,34 +4,40 @@ namespace Spatie\BpostAddressWebservice;
 
 use InvalidArgumentException;
 
+/**
+ * @property string streetName
+ * @property string streetNumber
+ * @property string boxNumber
+ * @property string postalCode
+ * @property string municipalityName
+ * @property string country
+ */
 class Address
 {
     /** @var string */
-    protected $streetName;
+    private $streetName;
 
     /** @var string */
-    protected $streetNumber;
+    private $streetNumber;
 
     /** @var string */
-    protected $boxNumber;
+    private $boxNumber;
 
     /** @var string */
-    protected $postalCode;
+    private $postalCode;
 
     /** @var string */
-    protected $municipalityName;
+    private $municipalityName;
 
     /** @var string */
-    protected $country;
+    private $country = 'BELGIE';
 
-    public function __construct(array $attributes)
+    private function __construct(array $attributes)
     {
         foreach ($attributes as $attribute => $value) {
-            if (! property_exists($this, $attribute)) {
-                throw new InvalidArgumentException("Unknown attribute `$attribute`");
+            if (property_exists($this, $attribute)) {
+                $this->$attribute = $value;
             }
-
-            $this->$attribute = $value;
         }
     }
 
@@ -50,5 +56,22 @@ class Address
             'municipalityName' => $attributes['PostalAddress']['StructuredPostalCodeMunicipality']['MunicipalityName'] ?? '',
             'country' => $attributes['PostalAddress']['CountryName'] ?? '',
         ]);
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'streetName' => $this->streetName,
+            'streetNumber' => $this->streetNumber,
+            'boxNumber' => $this->boxNumber,
+            'postalCode' => $this->postalCode,
+            'municipalityName' => $this->municipalityName,
+            'country' => $this->country,
+        ];
+    }
+
+    public function __get(string $key): string
+    {
+        return $this->toArray()[$key];
     }
 }
