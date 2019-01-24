@@ -12,7 +12,7 @@ use GuzzleHttp\Exception\ClientException;
 class BpostGateway implements Gateway
 {
     /** @var \GuzzleHttp\Client */
-    private $client;
+    protected $client;
 
     public function __construct()
     {

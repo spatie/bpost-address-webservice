@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 class FakeGateway implements Gateway
 {
     /** @var \Spatie\BpostAddressWebservice\Requests\ValidateAddressesRequest */
-    private $lastRequest;
+    protected $lastRequest;
 
     public function validateAddresses(ValidateAddressesRequest $validateAddressesRequest): ValidateAddressesResponse
     {

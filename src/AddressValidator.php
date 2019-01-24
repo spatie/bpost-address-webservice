@@ -18,10 +18,10 @@ class AddressValidator
     const OPTION_INCLUDE_NUMBER_OF_BOXES = 'IncludeNumberOfBoxes';
 
     /** @var \Spatie\BpostAddressWebservice\Gateway */
-    private $gateway;
+    protected $gateway;
 
     /** @var array */
-    private $options = [];
+    protected $options = [];
 
     public function __construct(Gateway $gateway)
     {

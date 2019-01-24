@@ -13,16 +13,16 @@ namespace Spatie\BpostAddressWebservice;
 class ValidatedAddress
 {
     /** @var \Spatie\BpostAddressWebservice\Address */
-    private $validatedAddress;
+    protected $validatedAddress;
 
     /** @var \Spatie\BpostAddressWebservice\Address */
-    private $originalAddress;
+    protected $originalAddress;
 
     /** @var \Spatie\BpostAddressWebservice\Error[] */
-    private $errors;
+    protected $errors;
 
     /** @var \Spatie\BpostAddressWebservice\Warning[] */
-    private $warnings;
+    protected $warnings;
 
     public function __construct(
         Address $validatedAddress,

@@ -9,10 +9,10 @@ use Spatie\BpostAddressWebservice\AddressValidator;
 class ValidateAddressesRequest
 {
     /** @var array */
-    private $addresses;
+    protected $addresses;
 
     /** @var array */
-    private $options;
+    protected $options;
 
     public function __construct(array $addresses, array $options)
     {

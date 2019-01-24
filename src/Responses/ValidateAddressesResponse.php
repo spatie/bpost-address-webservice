@@ -11,10 +11,10 @@ use Spatie\BpostAddressWebservice\Warning;
 class ValidateAddressesResponse
 {
     /** @var array */
-    private $responseBody = [];
+    protected $responseBody = [];
 
     /** @var \Spatie\BpostAddressWebservice\Address */
-    private $originalAddresses = [];
+    protected $originalAddresses = [];
 
     public function __construct(array $responseBody, array $originalAddresses)
     {

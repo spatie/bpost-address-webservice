@@ -15,24 +15,24 @@ use InvalidArgumentException;
 class Address
 {
     /** @var string */
-    private $streetName;
+    protected $streetName;
 
     /** @var string */
-    private $streetNumber;
+    protected $streetNumber;
 
     /** @var string */
-    private $boxNumber;
+    protected $boxNumber;
 
     /** @var string */
-    private $postalCode;
+    protected $postalCode;
 
     /** @var string */
-    private $municipalityName;
+    protected $municipalityName;
 
     /** @var string */
-    private $country = 'BELGIE';
+    protected $country = 'BELGIE';
 
-    private function __construct(array $attributes)
+    protected function __construct(array $attributes)
     {
         foreach ($attributes as $attribute => $value) {
             if (property_exists($this, $attribute)) {
