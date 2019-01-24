@@ -1,21 +1,24 @@
 <?php
 
-namespace Spatie\BpostAddressWebservice\Tests;
+namespace Spatie\BpostAddressWebservice\Tests\Integration;
 
 use PHPUnit\Framework\TestCase;
 use Spatie\BpostAddressWebservice\Address;
 use Spatie\BpostAddressWebservice\AddressValidator;
 use Spatie\BpostAddressWebservice\ValidatedAddress;
+use Spatie\BpostAddressWebservice\Exceptions\TooManyAddresses;
+use Spatie\Snapshots\MatchesSnapshots;
 
-/** @group integration */
 class AddressValidatorTest extends TestCase
 {
+    use MatchesSnapshots;
+
     /** @test */
     public function it_validates_addresses()
     {
         $addressValidator = AddressValidator::create();
 
-        $validatedAddresses = $addressValidator->validate([
+        $validationResult = $addressValidator->validate([
             Address::create([
                 'streetName' => 'Samberstraat',
                 'streetNumber' => '69',
@@ -41,6 +44,12 @@ class AddressValidatorTest extends TestCase
                 'country' => 'BELGIE',
             ]),
         ]);
+
+        $this->assertMatchesJsonSnapshot(
+            json_encode($validationResult->responseBody())
+        );
+
+        $validatedAddresses = $validationResult->validatedAddresses();
 
         $this->assertInstanceOf(ValidatedAddress::class, $validatedAddresses[0]);
         $this->assertInstanceOf(ValidatedAddress::class, $validatedAddresses[1]);

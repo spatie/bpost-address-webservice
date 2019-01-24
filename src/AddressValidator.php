@@ -2,8 +2,10 @@
 
 namespace Spatie\BpostAddressWebservice;
 
+use Spatie\BpostAddressWebservice\Exceptions\TooManyAddresses;
 use Spatie\BpostAddressWebservice\Gateways\BpostGateway;
 use Spatie\BpostAddressWebservice\Requests\ValidateAddressesRequest;
+use Spatie\BpostAddressWebservice\Responses\ValidateAddressesResponse;
 
 class AddressValidator
 {
@@ -39,16 +41,14 @@ class AddressValidator
         return $this;
     }
 
-    public function validate(array $addresses): array
+    public function validate(array $addresses): ValidateAddressesResponse
     {
         if (count($addresses) > 100) {
             throw new TooManyAddresses();
         }
 
-        $validateAddressesResponse = $this->gateway->validateAddresses(
+        return $this->gateway->validateAddresses(
             new ValidateAddressesRequest($addresses, $this->options)
         );
-
-        return $validateAddressesResponse->validatedAddresses();
     }
 }

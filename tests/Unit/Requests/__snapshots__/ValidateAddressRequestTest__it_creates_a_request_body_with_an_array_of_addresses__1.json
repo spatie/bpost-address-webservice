@@ -1,0 +1,30 @@
+{
+    "ValidateAddressesRequest": {
+        "AddressToValidateList": {
+            "AddressToValidate": [
+                {
+                    "@id": 0,
+                    "PostalAddress": {
+                        "DeliveryPointLocation": {
+                            "StructuredDeliveryPointLocation": {
+                                "StreetName": "Samberstraat",
+                                "StreetNumber": "69",
+                                "BoxNumber": "D"
+                            }
+                        },
+                        "PostalCodeMunicipality": {
+                            "StructuredPostalCodeMunicipality": {
+                                "PostalCode": "2060",
+                                "MunicipalityName": "Antwerpen"
+                            }
+                        }
+                    },
+                    "DeliveringCountryISOCode": "BELGIE"
+                }
+            ]
+        },
+        "ValidateAddressOptions": {
+            "IncludeSuffixList": true
+        }
+    }
+}

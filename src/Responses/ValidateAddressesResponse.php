@@ -2,7 +2,6 @@
 
 namespace Spatie\BpostAddressWebservice\Responses;
 
-use GuzzleHttp\Psr7\Response;
 use Spatie\BpostAddressWebservice\Address;
 use Spatie\BpostAddressWebservice\Error;
 use Spatie\BpostAddressWebservice\Requests\ValidateAddressesRequest;
@@ -11,28 +10,24 @@ use Spatie\BpostAddressWebservice\Warning;
 
 class ValidateAddressesResponse
 {
-    /** @var string */
-    private $error;
+    /** @var array */
+    private $responseBody = [];
 
-    /** @var string */
-    private $validatedAddresses = [];
+    /** @var \Spatie\BpostAddressWebservice\Address */
+    private $originalAddresses = [];
 
-    private function __construct()
+    public function __construct(array $responseBody, array $originalAddresses)
     {
+        $this->responseBody = $responseBody;
+
+        $this->originalAddresses = $originalAddresses;
     }
 
-    public function validatedAddresses(): array
+    public function validatedAddresses() : array
     {
-        return $this->validatedAddresses;
-    }
+        $validationResults = $this->responseBody['ValidateAddressesResponse']['ValidatedAddressResultList']['ValidatedAddressResult'] ?? [];
 
-    public static function fromResponseBody(array $responseBody, array $originalAddresses): ValidateAddressesResponse
-    {
-        $validationResults = $responseBody['ValidateAddressesResponse']['ValidatedAddressResultList']['ValidatedAddressResult'] ?? [];
-
-        $validateAddressResponse = new self();
-
-        $validateAddressResponse->validatedAddresses = array_map(function (array $validationResult) use ($originalAddresses) {
+        return array_map(function (array $validationResult) {
             $errors = [];
             $warnings = [];
 
@@ -48,12 +43,15 @@ class ValidateAddressesResponse
 
             return new ValidatedAddress(
                 Address::fromResponse($validationResult['ValidatedAddressList']['ValidatedAddress'][0] ?? []),
-                $originalAddresses[$validationResult['@id']],
+                $this->originalAddresses[$validationResult['@id']],
                 $errors,
                 $warnings
             );
         }, $validationResults);
+    }
 
-        return $validateAddressResponse;
+    public function responseBody() : array
+    {
+        return $this->responseBody;
     }
 }

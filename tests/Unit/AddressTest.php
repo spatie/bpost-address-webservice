@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\BpostAddressWebservice\Tests;
+namespace Spatie\BpostAddressWebservice\Tests\Unit;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
@@ -62,5 +62,25 @@ class AddressTest extends TestCase
             'municipalityName' => 'ANTWERPEN',
             'country' => 'BELGIE',
         ], $address->toArray());
+    }
+
+    /** @test */
+    public function attributes_are_accessible()
+    {
+        $address = Address::create([
+            'streetName' => 'Samberstraat',
+            'streetNumber' => '69',
+            'boxNumber' => 'D',
+            'postalCode' => '2060',
+            'municipalityName' => 'Antwerpen',
+            'country' => 'BELGIE',
+        ]);
+
+        $this->assertEquals($address->streetName, 'Samberstraat');
+        $this->assertEquals($address->streetNumber, '69');
+        $this->assertEquals($address->boxNumber, 'D');
+        $this->assertEquals($address->postalCode, '2060');
+        $this->assertEquals($address->municipalityName, 'Antwerpen');
+        $this->assertEquals($address->country, 'BELGIE');
     }
 }

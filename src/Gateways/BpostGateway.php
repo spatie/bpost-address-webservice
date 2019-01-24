@@ -27,7 +27,7 @@ class BpostGateway implements Gateway
             'json' => $validateAddressesRequest->getBody(),
         ]);
 
-        return ValidateAddressesResponse::fromResponseBody(
+        return new ValidateAddressesResponse(
             json_decode((string) $response->getBody(), true),
             $validateAddressesRequest->addresses()
         );
