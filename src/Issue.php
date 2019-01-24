@@ -8,12 +8,12 @@ abstract class Issue
     protected $message;
 
     /** @var string */
-    protected $component;
+    protected $attribute;
 
-    public function __construct(string $message, string $component)
+    public function __construct(string $message, string $attribute)
     {
         $this->message = $message;
-        $this->component = $component;
+        $this->attribute = $attribute;
     }
 
     public function message(): string
@@ -21,8 +21,8 @@ abstract class Issue
         return $this->message;
     }
 
-    public function component(): string
+    public function attribute(): string
     {
-        return $this->component;
+        return $this->attribute;
     }
 }

@@ -14,11 +14,50 @@ class AddressValidatorTest extends TestCase
     use MatchesSnapshots;
 
     /** @test */
-    public function it_validates_addresses()
+    public function it_can_validate_an_address()
     {
         $addressValidator = AddressValidator::create();
 
-        $validationResult = $addressValidator->validate([
+        $validatedAddress = $addressValidator->validate(
+            Address::create([
+                'streetName' => 'Samberstraat',
+                'streetNumber' => '69',
+                'boxNumber' => '',
+                'postalCode' => '2060',
+                'municipalityName' => 'Antwaarpe',
+                'country' => 'BELGIE',
+            ])
+        );
+
+        $this->assertInstanceOf(ValidatedAddress::class, $validatedAddress);
+
+        $this->assertTrue($validatedAddress->hasIssues());
+        $this->assertFalse($validatedAddress->hasErrors());
+        $this->assertTrue($validatedAddress->hasWarnings());
+        $this->assertEquals([
+            'streetName' => 'SAMBERSTRAAT',
+            'streetNumber' => '69',
+            'boxNumber' => '',
+            'postalCode' => '2060',
+            'municipalityName' => 'ANTWERPEN',
+            'country' => 'BELGIE',
+        ], $validatedAddress->toArray());
+        $this->assertEquals([
+                'streetName' => 'Samberstraat',
+                'streetNumber' => '69',
+                'boxNumber' => '',
+                'postalCode' => '2060',
+                'municipalityName' => 'Antwaarpe',
+                'country' => 'BELGIE',
+        ], $validatedAddress->originalAddress()->toArray());
+    }
+
+    /** @test */
+    public function it_can_validate_many_addresses()
+    {
+        $addressValidator = AddressValidator::create();
+
+        $validatedAddresses = $addressValidator->validateMany([
             Address::create([
                 'streetName' => 'Samberstraat',
                 'streetNumber' => '69',
@@ -44,12 +83,6 @@ class AddressValidatorTest extends TestCase
                 'country' => 'BELGIE',
             ]),
         ]);
-
-        $this->assertMatchesJsonSnapshot(
-            json_encode($validationResult->responseBody())
-        );
-
-        $validatedAddresses = $validationResult->validatedAddresses();
 
         $this->assertInstanceOf(ValidatedAddress::class, $validatedAddresses[0]);
         $this->assertInstanceOf(ValidatedAddress::class, $validatedAddresses[1]);

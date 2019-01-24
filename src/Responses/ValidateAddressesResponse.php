@@ -23,7 +23,7 @@ class ValidateAddressesResponse
         $this->originalAddresses = $originalAddresses;
     }
 
-    public function validatedAddresses() : array
+    public function validatedAddresses(): array
     {
         $validationResults = $this->responseBody['ValidateAddressesResponse']['ValidatedAddressResultList']['ValidatedAddressResult'] ?? [];
 
@@ -33,11 +33,11 @@ class ValidateAddressesResponse
 
             foreach ($validationResult['Error'] ?? [] as $error) {
                 if ($error['ErrorSeverity'] === 'warning') {
-                    $warnings[] = new Warning($error['ErrorCode'], $error['ComponentRef']);
+                    $warnings[] = new Warning($error['ErrorCode'], lcfirst($error['ComponentRef']));
                 }
 
                 if ($error['ErrorSeverity'] === 'error') {
-                    $errors[] = new Error($error['ErrorCode'], $error['ComponentRef']);
+                    $errors[] = new Error($error['ErrorCode'], lcfirst($error['ComponentRef']));
                 }
             }
 

@@ -27,7 +27,7 @@ class AddressValidatorTest extends TestCase
 
         $this->expectException(TooManyAddresses::class);
 
-        AddressValidator::create()->validate($addresses);
+        AddressValidator::create()->validateMany($addresses);
     }
 
     /** @test */
@@ -40,7 +40,7 @@ class AddressValidatorTest extends TestCase
             AddressValidator::OPTION_INCLUDE_NUMBER_OF_BOXES => true,
         ]);
 
-        $addressValidator->validate([
+        $addressValidator->validateMany([
             Address::create([
                 'streetName' => 'Samberstraat',
                 'streetNumber' => '69',
@@ -48,7 +48,7 @@ class AddressValidatorTest extends TestCase
                 'postalCode' => '2060',
                 'municipalityName' => 'Antwerpen',
                 'country' => 'BELGIE',
-            ]),
+            ])
         ]);
 
         $fakeGateway->assertReceivedOptions([
