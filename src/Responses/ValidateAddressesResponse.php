@@ -2,8 +2,8 @@
 
 namespace Spatie\BpostAddressWebservice\Responses;
 
-use Spatie\BpostAddressWebservice\Issues\Error;
 use Spatie\BpostAddressWebservice\Address;
+use Spatie\BpostAddressWebservice\Issues\Error;
 use Spatie\BpostAddressWebservice\Issues\Warning;
 use Spatie\BpostAddressWebservice\ValidatedAddress;
 

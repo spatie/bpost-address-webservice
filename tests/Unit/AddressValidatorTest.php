@@ -5,9 +5,8 @@ namespace Spatie\BpostAddressWebservice\Tests\Unit;
 use PHPUnit\Framework\TestCase;
 use Spatie\BpostAddressWebservice\Address;
 use Spatie\BpostAddressWebservice\AddressValidator;
-use Spatie\BpostAddressWebservice\Exceptions\CouldNotValidateAddress;
 use Spatie\BpostAddressWebservice\Tests\Mocks\FakeGateway;
-use Spatie\BpostAddressWebservice\Exceptions\CouldNotValidate;
+use Spatie\BpostAddressWebservice\Exceptions\CouldNotValidateAddress;
 
 class AddressValidatorTest extends TestCase
 {
