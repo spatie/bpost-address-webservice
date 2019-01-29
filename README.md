@@ -1,9 +1,9 @@
 # An API wrapper for bpost's address webservice
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/bpost-address-webservice.svg?style=flat-square)](https://packagist.org/packages/spatie/:package_name)
-[![Build Status](https://img.shields.io/travis/spatie/bpost-address-webservice/master.svg?style=flat-square)](https://travis-ci.org/spatie/:package_name)
-[![Quality Score](https://img.shields.io/scrutinizer/g/spatie/bpost-address-webservice.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/:package_name)
-[![Total Downloads](https://img.shields.io/packagist/dt/spatie/bpost-address-webservice.svg?style=flat-square)](https://packagist.org/packages/spatie/:package_name)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/bpost-address-webservice.svg?style=flat-square)](https://packagist.org/packages/spatie/bpost-address-webservice)
+[![Build Status](https://img.shields.io/travis/spatie/bpost-address-webservice/master.svg?style=flat-square)](https://travis-ci.org/spatie/bpost-address-webservice)
+[![Quality Score](https://img.shields.io/scrutinizer/g/spatie/bpost-address-webservice.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/bpost-address-webservice)
+[![Total Downloads](https://img.shields.io/packagist/dt/spatie/bpost-address-webservice.svg?style=flat-square)](https://packagist.org/packages/spatie/bpost-address-webservice)
 
 Create an `Address`, and validate it.
 
