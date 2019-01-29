@@ -3,7 +3,6 @@
 namespace Spatie\BpostAddressWebservice\Gateways;
 
 use GuzzleHttp\Client;
-use Spatie\BpostAddressWebservice\Gateway;
 use Spatie\BpostAddressWebservice\Requests\ValidateAddressesRequest;
 use Spatie\BpostAddressWebservice\Responses\ValidateAddressesResponse;
 

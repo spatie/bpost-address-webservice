@@ -3,7 +3,7 @@
 namespace Spatie\BpostAddressWebservice\Tests\Mocks;
 
 use PHPUnit\Framework\TestCase;
-use Spatie\BpostAddressWebservice\Gateway;
+use Spatie\BpostAddressWebservice\Gateways\Gateway;
 use Spatie\BpostAddressWebservice\Requests\ValidateAddressesRequest;
 use Spatie\BpostAddressWebservice\Responses\ValidateAddressesResponse;
 

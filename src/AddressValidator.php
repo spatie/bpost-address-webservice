@@ -5,6 +5,7 @@ namespace Spatie\BpostAddressWebservice;
 use Spatie\BpostAddressWebservice\Exceptions\CouldNotValidateAddress;
 use Spatie\BpostAddressWebservice\Gateways\BpostGateway;
 use Spatie\BpostAddressWebservice\Exceptions\CouldNotValidate;
+use Spatie\BpostAddressWebservice\Gateways\Gateway;
 use Spatie\BpostAddressWebservice\Requests\ValidateAddressesRequest;
 
 class AddressValidator
@@ -18,7 +19,7 @@ class AddressValidator
     const OPTION_INCLUDE_LIST_OF_BOXES = 'IncludeListOfBoxes';
     const OPTION_INCLUDE_NUMBER_OF_BOXES = 'IncludeNumberOfBoxes';
 
-    /** @var \Spatie\BpostAddressWebservice\Gateway */
+    /** @var \Spatie\BpostAddressWebservice\Gateways\Gateway */
     protected $gateway;
 
     /** @var array */
