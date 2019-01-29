@@ -23,7 +23,7 @@ $address = Address::create([
 $validatedAddress = $addressValidator->validate($address);
 ```
 
-The validated address can contain *errors* and *warnings£. If it has any *error* or *warning*, we say that it has *issues*.
+The validated address can contain *errors* and *warnings*. If it has any *error* or *warning*, we say that it has *issues*.
 
 ```php
 $validatedAddress->hasErrors(); // false
