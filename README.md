@@ -3,6 +3,7 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/bpost-address-webservice.svg?style=flat-square)](https://packagist.org/packages/spatie/bpost-address-webservice)
 [![Build Status](https://img.shields.io/travis/spatie/bpost-address-webservice/master.svg?style=flat-square)](https://travis-ci.org/spatie/bpost-address-webservice)
 [![Quality Score](https://img.shields.io/scrutinizer/g/spatie/bpost-address-webservice.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/bpost-address-webservice)
+[![StyleCI](https://github.styleci.io/repos/163304747/shield?branch=master)](https://github.styleci.io/repos/163304747)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/bpost-address-webservice.svg?style=flat-square)](https://packagist.org/packages/spatie/bpost-address-webservice)
 
 Create an `Address`, and validate it.
