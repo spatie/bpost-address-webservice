@@ -2,8 +2,9 @@
 
 namespace Spatie\BpostAddressWebservice;
 
+use Spatie\BpostAddressWebservice\Exceptions\CouldNotValidateAddress;
 use Spatie\BpostAddressWebservice\Gateways\BpostGateway;
-use Spatie\BpostAddressWebservice\Exceptions\TooManyAddresses;
+use Spatie\BpostAddressWebservice\Exceptions\CouldNotValidate;
 use Spatie\BpostAddressWebservice\Requests\ValidateAddressesRequest;
 
 class AddressValidator
@@ -51,8 +52,10 @@ class AddressValidator
 
     public function validateMany(array $addresses): array
     {
-        if (count($addresses) > 100) {
-            throw new TooManyAddresses();
+        $maximumAddresCount = 100;
+
+        if (count($addresses) > $maximumAddresCount) {
+            throw CouldNotValidateAddress::tooManyAddresses($addresses, $maximumAddresCount);
         }
 
         $validateAddressesResponse = $this->gateway->validateAddresses(

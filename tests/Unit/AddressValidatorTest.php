@@ -5,8 +5,9 @@ namespace Spatie\BpostAddressWebservice\Tests\Unit;
 use PHPUnit\Framework\TestCase;
 use Spatie\BpostAddressWebservice\Address;
 use Spatie\BpostAddressWebservice\AddressValidator;
+use Spatie\BpostAddressWebservice\Exceptions\CouldNotValidateAddress;
 use Spatie\BpostAddressWebservice\Tests\Mocks\FakeGateway;
-use Spatie\BpostAddressWebservice\Exceptions\TooManyAddresses;
+use Spatie\BpostAddressWebservice\Exceptions\CouldNotValidate;
 
 class AddressValidatorTest extends TestCase
 {
@@ -24,7 +25,7 @@ class AddressValidatorTest extends TestCase
             ]);
         }, range(1, 101));
 
-        $this->expectException(TooManyAddresses::class);
+        $this->expectException(CouldNotValidateAddress::class);
 
         AddressValidator::create()->validateMany($addresses);
     }
