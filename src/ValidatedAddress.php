@@ -18,10 +18,10 @@ class ValidatedAddress
     /** @var \Spatie\BpostAddressWebservice\Address */
     protected $originalAddress;
 
-    /** @var \Spatie\BpostAddressWebservice\Error[] */
+    /** @var \Spatie\BpostAddressWebservice\Issues\Error[] */
     protected $errors;
 
-    /** @var \Spatie\BpostAddressWebservice\Warning[] */
+    /** @var \Spatie\BpostAddressWebservice\Issues\Warning[] */
     protected $warnings;
 
     public function __construct(

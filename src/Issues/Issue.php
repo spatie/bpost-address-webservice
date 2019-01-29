@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\BpostAddressWebservice;
+namespace Spatie\BpostAddressWebservice\Issues;
 
 abstract class Issue
 {
