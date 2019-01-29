@@ -32,6 +32,7 @@ class ValidatedAddress
     ) {
         $this->validatedAddress = $validatedAddress;
         $this->originalAddress = $originalAddress;
+
         $this->errors = $errors;
         $this->warnings = $warnings;
     }
