@@ -2,33 +2,25 @@
 
 namespace Spatie\BpostAddressWebservice;
 
-/**
- * @property string streetName
- * @property string streetNumber
- * @property string boxNumber
- * @property string postalCode
- * @property string municipalityName
- * @property string country
- */
 class Address
 {
     /** @var string */
-    protected $streetName;
+    public $streetName;
 
     /** @var string */
-    protected $streetNumber;
+    public $streetNumber;
 
     /** @var string */
-    protected $boxNumber;
+    public $boxNumber;
 
     /** @var string */
-    protected $postalCode;
+    public $postalCode;
 
     /** @var string */
-    protected $municipalityName;
+    public $municipalityName;
 
     /** @var string */
-    protected $country = 'BELGIE';
+    public $country = 'BELGIE';
 
     protected function __construct(array $attributes)
     {
@@ -66,10 +58,5 @@ class Address
             'municipalityName' => $this->municipalityName,
             'country' => $this->country,
         ];
-    }
-
-    public function __get(string $key): string
-    {
-        return $this->toArray()[$key];
     }
 }

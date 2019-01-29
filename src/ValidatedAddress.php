@@ -9,20 +9,21 @@ namespace Spatie\BpostAddressWebservice;
  * @property string postalCode
  * @property string municipalityName
  * @property string country
+ * @property array issues
  */
 class ValidatedAddress
 {
     /** @var \Spatie\BpostAddressWebservice\Address */
-    protected $validatedAddress;
+    public $validatedAddress;
 
     /** @var \Spatie\BpostAddressWebservice\Address */
-    protected $originalAddress;
+    public $originalAddress;
 
     /** @var \Spatie\BpostAddressWebservice\Issues\Error[] */
-    protected $errors;
+    public $errors;
 
     /** @var \Spatie\BpostAddressWebservice\Issues\Warning[] */
-    protected $warnings;
+    public $warnings;
 
     public function __construct(
         Address $validatedAddress,
@@ -42,19 +43,9 @@ class ValidatedAddress
         return count($this->errors) > 0;
     }
 
-    public function errors(): array
-    {
-        return $this->errors;
-    }
-
     public function hasWarnings(): bool
     {
         return count($this->warnings) > 0;
-    }
-
-    public function warnings(): array
-    {
-        return $this->warnings;
     }
 
     public function hasIssues(): bool
@@ -77,8 +68,12 @@ class ValidatedAddress
         return $this->validatedAddress->toArray();
     }
 
-    public function __get(string $key): string
+    public function __get(string $key)
     {
+        if ($key === 'issues') {
+            return $this->issues;
+        }
+
         return $this->toArray()[$key];
     }
 }
