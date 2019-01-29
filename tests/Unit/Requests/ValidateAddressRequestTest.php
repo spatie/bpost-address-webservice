@@ -2,12 +2,11 @@
 
 namespace Spatie\BpostAddressWebservice\Tests\Unit\Requests;
 
-use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Spatie\BpostAddressWebservice\Address;
-use Spatie\BpostAddressWebservice\Requests\ValidateAddressesRequest;
-use Spatie\BpostAddressWebservice\AddressValidator;
 use Spatie\Snapshots\MatchesSnapshots;
+use Spatie\BpostAddressWebservice\Address;
+use Spatie\BpostAddressWebservice\AddressValidator;
+use Spatie\BpostAddressWebservice\Requests\ValidateAddressesRequest;
 
 class ValidateAddressRequestTest extends TestCase
 {

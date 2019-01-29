@@ -2,8 +2,8 @@
 
 namespace Spatie\BpostAddressWebservice;
 
-use Spatie\BpostAddressWebservice\Exceptions\TooManyAddresses;
 use Spatie\BpostAddressWebservice\Gateways\BpostGateway;
+use Spatie\BpostAddressWebservice\Exceptions\TooManyAddresses;
 use Spatie\BpostAddressWebservice\Requests\ValidateAddressesRequest;
 
 class AddressValidator

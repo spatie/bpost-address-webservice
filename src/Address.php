@@ -2,8 +2,6 @@
 
 namespace Spatie\BpostAddressWebservice;
 
-use InvalidArgumentException;
-
 /**
  * @property string streetName
  * @property string streetNumber

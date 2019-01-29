@@ -3,8 +3,6 @@
 namespace Spatie\BpostAddressWebservice\Requests;
 
 use Spatie\BpostAddressWebservice\Address;
-use Spatie\BpostAddressWebservice\ValidateAddressesResponse;
-use Spatie\BpostAddressWebservice\AddressValidator;
 
 class ValidateAddressesRequest
 {

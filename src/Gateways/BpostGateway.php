@@ -6,8 +6,6 @@ use GuzzleHttp\Client;
 use Spatie\BpostAddressWebservice\Gateway;
 use Spatie\BpostAddressWebservice\Requests\ValidateAddressesRequest;
 use Spatie\BpostAddressWebservice\Responses\ValidateAddressesResponse;
-use Spatie\BpostAddressWebservice\AddressValidatorResult;
-use GuzzleHttp\Exception\ClientException;
 
 class BpostGateway implements Gateway
 {
