@@ -38,6 +38,15 @@ class ValidatedAddress
         $this->warnings = $warnings;
     }
 
+    public function __get(string $key)
+    {
+        if ($key === 'issues') {
+            return $this->issues;
+        }
+
+        return $this->toArray()[$key];
+    }
+
     public function hasErrors(): bool
     {
         return count($this->errors) > 0;
@@ -68,12 +77,5 @@ class ValidatedAddress
         return $this->validatedAddress->toArray();
     }
 
-    public function __get(string $key)
-    {
-        if ($key === 'issues') {
-            return $this->issues;
-        }
 
-        return $this->toArray()[$key];
-    }
 }
