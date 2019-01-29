@@ -2,7 +2,6 @@
 
 namespace Spatie\BpostAddressWebservice\Tests\Unit;
 
-use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Spatie\BpostAddressWebservice\Address;
 

@@ -3,11 +3,11 @@
 namespace Spatie\BpostAddressWebservice\Tests\Unit\Responses;
 
 use PHPUnit\Framework\TestCase;
-use Spatie\BpostAddressWebservice\Address;
 use Spatie\Snapshots\MatchesSnapshots;
+use Spatie\BpostAddressWebservice\Address;
 use Spatie\BpostAddressWebservice\Responses\ValidateAddressesResponse;
 
-class ValidateAddressRequestTest extends TestCase
+class ValidateAddressResponseTest extends TestCase
 {
     use MatchesSnapshots;
 
@@ -26,37 +26,37 @@ class ValidateAddressRequestTest extends TestCase
                                         'PostalAddress' => [
                                             'StructuredDeliveryPointLocation' => [
                                                 'StreetName' => 'SAMBERSTRAAT',
-                                                'StreetNumber' => '69'
+                                                'StreetNumber' => '69',
                                             ],
                                             'StructuredPostalCodeMunicipality' => [
                                                 'PostalCode' => '2060',
-                                                'MunicipalityName' => 'ANTWERPEN'
+                                                'MunicipalityName' => 'ANTWERPEN',
                                             ],
-                                            'CountryName' => 'BELGIE'
+                                            'CountryName' => 'BELGIE',
                                         ],
                                         'AddressLanguage' => 'nl',
                                         'Label' => [
                                             'Line' => [
                                                 'SAMBERSTRAAT 69',
-                                                '2060 ANTWERPEN'
-                                            ]
-                                        ]
-                                    ]
-                                ]
+                                                '2060 ANTWERPEN',
+                                            ],
+                                        ],
+                                    ],
+                                ],
                             ],
                             'Error' => [
                                 [
                                     'ComponentRef' => 'MunicipalityName',
                                     'ErrorCode' => 'anomaly_in_field',
-                                    'ErrorSeverity' => 'warning'
-                                ]
+                                    'ErrorSeverity' => 'warning',
+                                ],
                             ],
                             'DetectedInputAddressLanguage' => 'nl',
-                            'TransactionID' => 'f579d528-3874-48ee-8eb9-7fe54ea39432'
+                            'TransactionID' => 'f579d528-3874-48ee-8eb9-7fe54ea39432',
                         ],
-                    ]
-                ]
-            ]
+                    ],
+                ],
+            ],
         ];
 
         $originalAddresses = [

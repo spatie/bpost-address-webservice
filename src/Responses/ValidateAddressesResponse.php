@@ -2,11 +2,10 @@
 
 namespace Spatie\BpostAddressWebservice\Responses;
 
-use Spatie\BpostAddressWebservice\Address;
 use Spatie\BpostAddressWebservice\Error;
-use Spatie\BpostAddressWebservice\Requests\ValidateAddressesRequest;
-use Spatie\BpostAddressWebservice\ValidatedAddress;
+use Spatie\BpostAddressWebservice\Address;
 use Spatie\BpostAddressWebservice\Warning;
+use Spatie\BpostAddressWebservice\ValidatedAddress;
 
 class ValidateAddressesResponse
 {

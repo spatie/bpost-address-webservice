@@ -3,11 +3,10 @@
 namespace Spatie\BpostAddressWebservice\Tests\Integration;
 
 use PHPUnit\Framework\TestCase;
+use Spatie\Snapshots\MatchesSnapshots;
 use Spatie\BpostAddressWebservice\Address;
 use Spatie\BpostAddressWebservice\AddressValidator;
 use Spatie\BpostAddressWebservice\ValidatedAddress;
-use Spatie\BpostAddressWebservice\Exceptions\TooManyAddresses;
-use Spatie\Snapshots\MatchesSnapshots;
 
 class AddressValidatorTest extends TestCase
 {

@@ -5,16 +5,15 @@ namespace Spatie\BpostAddressWebservice\Tests\Unit;
 use PHPUnit\Framework\TestCase;
 use Spatie\BpostAddressWebservice\Address;
 use Spatie\BpostAddressWebservice\AddressValidator;
-use Spatie\BpostAddressWebservice\ValidatedAddress;
-use Spatie\BpostAddressWebservice\Exceptions\TooManyAddresses;
 use Spatie\BpostAddressWebservice\Tests\Mocks\FakeGateway;
+use Spatie\BpostAddressWebservice\Exceptions\TooManyAddresses;
 
 class AddressValidatorTest extends TestCase
 {
     /** @test */
     public function it_doesnt_validate_more_than_100_addresses()
     {
-        $addresses = array_map(function() {
+        $addresses = array_map(function () {
             return Address::create([
                 'streetName' => 'Samberstraat',
                 'streetNumber' => '69',
@@ -48,7 +47,7 @@ class AddressValidatorTest extends TestCase
                 'postalCode' => '2060',
                 'municipalityName' => 'Antwerpen',
                 'country' => 'BELGIE',
-            ])
+            ]),
         ]);
 
         $fakeGateway->assertReceivedOptions([
