@@ -76,6 +76,4 @@ class ValidatedAddress
     {
         return $this->validatedAddress->toArray();
     }
-
-
 }
