@@ -6,6 +6,8 @@
 [![StyleCI](https://github.styleci.io/repos/163304747/shield?branch=master)](https://github.styleci.io/repos/163304747)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/bpost-address-webservice.svg?style=flat-square)](https://packagist.org/packages/spatie/bpost-address-webservice)
 
+The Belgian mail service, Bpost, has an API to 
+
 Create an `\Spatie\BpostAddressWebservice\Address`, and validate it.
 
 ```php
