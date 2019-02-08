@@ -2,9 +2,8 @@
 
 namespace Spatie\BpostAddressWebservice;
 
-use Spatie\BpostAddressWebservice\Gateways\BpostGateway;
-use Spatie\BpostAddressWebservice\Exceptions\CouldNotValidate;
 use Spatie\BpostAddressWebservice\Gateways\Gateway;
+use Spatie\BpostAddressWebservice\Gateways\BpostGateway;
 use Spatie\BpostAddressWebservice\Requests\ValidateAddressesRequest;
 use Spatie\BpostAddressWebservice\Exceptions\CouldNotValidateAddress;
 
