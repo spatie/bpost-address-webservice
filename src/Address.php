@@ -21,6 +21,9 @@ class Address
 
     /** @var string */
     public $country = 'BELGIE';
+    
+    /** @var array */
+    public $coords;
 
     protected function __construct(array $attributes)
     {
@@ -45,6 +48,8 @@ class Address
             'postalCode' => $attributes['PostalAddress']['StructuredPostalCodeMunicipality']['PostalCode'] ?? '',
             'municipalityName' => $attributes['PostalAddress']['StructuredPostalCodeMunicipality']['MunicipalityName'] ?? '',
             'country' => $attributes['PostalAddress']['CountryName'] ?? '',
+            'coords' => [ 'lat' => $attributes['ServicePointDetail']['GeographicalLocationInfo']['GeographicalLocation']['Latitude']['Value'] ?? '',
+                          'lng' => $attributes['ServicePointDetail']['GeographicalLocationInfo']['GeographicalLocation']['Longitude']['Value'] ?? '' ],
         ]);
     }
 
@@ -57,6 +62,7 @@ class Address
             'postalCode' => $this->postalCode,
             'municipalityName' => $this->municipalityName,
             'country' => $this->country,
+            'coords' => $this->coords,
         ];
     }
 }
