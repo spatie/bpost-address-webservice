@@ -46,6 +46,11 @@ class AddressValidator
         $validateAddressesResponse = $this->gateway->validateAddresses(
             new ValidateAddressesRequest([$address], $this->options)
         );
+        
+         if(isset($validateAddressesResponse->responseBody()['ValidateAddressesResponse']['GeneralError'])) {
+            $msg = 'BPOST ' . $validateAddressesResponse->responseBody()['ValidateAddressesResponse']['GeneralError']['ErrorSeverity'] . ' ERROR: ' . $validateAddressesResponse->responseBody()['ValidateAddressesResponse']['GeneralError']['ErrorCode'];
+            throw new \Exception($msg);
+        }
 
         return $validateAddressesResponse->validatedAddresses()[0];
     }
