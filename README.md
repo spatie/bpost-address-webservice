@@ -90,7 +90,7 @@ Address webservice documentation is available on [bpost.be](https://www.bpost.be
 
 ## Support us
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/bpost-address-webservice.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/bpost-address-webservice)
+[<img src="https://spatie.be/github-ad-image/bpost-address-webservice.jpg" width="419px" />](https://spatie.be/github-ad-click/bpost-address-webservice)
 
 We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
 
